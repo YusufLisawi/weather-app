@@ -3,9 +3,10 @@ import Tilty from "react-tilty";
 export default function WeatherCard() {
   return (
     <Tilty max={10}>
-        <div className="mb-3 cursor-pointer weather-card py-3 px-5 w-full rounded-3xl relative overflow-hidden">
+        <div className="mb-5 cursor-pointer weather-card py-3 px-5 w-full rounded-3xl relative overflow-hidden">
+          <div className="layer"></div>
           <img
-            className="absolute inset-0 rounded -translate-y-4 opacity-70"
+            className="absolute inset-0 rounded -translate-y-4 -z-10"
             src="https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2148&q=80"
             alt="cloudy"
           />

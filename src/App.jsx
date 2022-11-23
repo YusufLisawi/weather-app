@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./components/SearchBar";
 import WeatherCard from "./components/WeatherCard";
+// import {getWeather} from "./api/weatherApi"
 
 export default function App() {
   const [focused, setFocused] = useState(false);
 
-  function onFocus() {
+  const onFocus = () => {
     setFocused(true);
   }
-  function onBlur() {
+  const onBlur = () => {
     setFocused(false);
   }
+
+  // useEffect(() => {
+  //   getWeather();
+  // }, [])
+
   return (
     <div className="container">
       <div className="relative">

@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       animation : {
-        blob : "blob 7s infinite"
+        blob : "blob 7s infinite",
+        pulseslow: "pulse 7s infinite"
       },
       keyframes : {
         blob: {

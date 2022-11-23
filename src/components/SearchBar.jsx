@@ -1,9 +1,14 @@
 import React, { useRef } from "react";
 import { IoMdSearch } from "react-icons/io";
-export default function SearchBar({onFocuss, onBlurr}) {
+export default function SearchBar({onSearch, onFocuss, onBlurr}) {
   const inputDiv = useRef();
   return (
-    <form className="relative z-50">
+    <form className="relative z-50" onSubmit={(e) => {
+      e.preventDefault()
+      if (inputDiv.current.value.trim() !== "")
+        onSearch(inputDiv.current.value.trim())
+        inputDiv.current.value = ""
+    }}>
       <div
         className="flex items-center gap-2 p-2 rounded-lg input-control"
         onClick={() => {

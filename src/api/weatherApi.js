@@ -45,7 +45,7 @@ const formatCurrentWeather = (data) => {
 };
 
 const getWeatherData = (searchParams) => {
-	const currentWeather = await getData('weather', searchParams).then(formatCurrentWeather)
+	const currentWeather = getData('weather', searchParams).then(formatCurrentWeather)
 
   return currentWeather
 }

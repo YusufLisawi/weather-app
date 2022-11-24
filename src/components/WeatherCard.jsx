@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Tilty from "react-tilty";
 import { formatToLocalTime } from "../api/weatherApi";
-import {AiTwotonePushpin} from "react-icons/ai"
+import { AiTwotonePushpin } from "react-icons/ai";
 
 export default function WeatherCard({
   weather: { dt, timezone, name, description, temp, humidity },
@@ -44,16 +44,15 @@ export default function WeatherCard({
                 {formatToLocalTime(dt, timezone, "hh:mm a")}
               </p>
             </div>
-            <div>
-              {/* <p className="ml-1 opacity-80 font-medium text-shadow">H:{parseInt(humidity)} <span style={{fontSize: '10px'}}>%</span></p> */}
-              <h1 className="text-5xl font-medium">{parseInt(temp)}˚</h1>
-            </div>
+            <h1 className="text-5xl font-medium">{Math.ceil(temp)}˚</h1>
           </div>
 
           <div className="font-medium flex justify-between items-center">
             <p className="opacity-70">{toCapitalize(description)}</p>
             <div>
-              <p className="duration-300 hover:scale-150 active:scale-50"><AiTwotonePushpin size={22}/></p>
+              <p className="duration-300 hover:scale-150 active:scale-50">
+                <AiTwotonePushpin size={22} />
+              </p>
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@ import getWeatherData from "./api/weatherApi";
 export default function App() {
   const [focused, setFocused] = useState(false);
   const [weather, setWeather] = useState(null);
+  const [MyWeather, setMyWeather] = useState(null);
 
   const onFocus = () => {
     setFocused(true);
@@ -13,15 +14,32 @@ export default function App() {
   const onBlur = () => {
     setFocused(false);
   };
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+
+        // fetchMyWeather(lat, lon);
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    console.log(weather)
-  }, [weather])
+    console.log(weather);
+  }, [weather]);
 
   const fetchWeather = async (city) => {
     await getWeatherData({ q: city, units: "metric" }).then((data) => {
       setWeather(data);
     });
+  };
+  const fetchMyWeather = async (lat, lon) => {
+    await getWeatherData({ lat: lat, lon: lon, units: "metric" }).then(
+      (data) => {
+        setMyWeather(data);
+      }
+    );
   };
 
   return (
@@ -43,7 +61,13 @@ export default function App() {
         <p className="font-medium my-4 mx-2 text-gray-200 opacity-50">
           Your current location
         </p>
-        {/* <WeatherCard weather={weather} /> */}
+        {MyWeather ? (
+          <WeatherCard weather={MyWeather} />
+        ) : (
+          <p className="font-medium my-4 mx-2 text-gray-300 opacity-50 flex justify-center">
+            Please allow permission to your location
+          </p>
+        )}
         <hr className="w-80 mx-auto opacity-10" />
         <br />
         {weather && (

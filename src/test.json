@@ -1,0 +1,73 @@
+{
+  "lat": 33.9911,
+  "lon": -6.8401,
+  "temp": 18.04,
+  "feels_like": 18.2,
+  "temp_min": 17.86,
+  "temp_max": 18.04,
+  "humidity": 88,
+  "name": "Rabat",
+  "dt": 1669311887,
+  "country": "MA",
+  "sunrise": 1669273699,
+  "sunset": 1669310405,
+  "speed": 2.57,
+  "details": "Clouds",
+  "description": "scattered clouds",
+  "icon": "03n",
+  "timezone": "Africa/Casablanca",
+  "daily": [
+    {
+      "title": "Fri",
+      "temp": 20.4,
+      "icon": "04d"
+    },
+    {
+      "title": "Sat",
+      "temp": 22.44,
+      "icon": "01d"
+    },
+    {
+      "title": "Sun",
+      "temp": 21.43,
+      "icon": "01d"
+    },
+    {
+      "title": "Mon",
+      "temp": 17.75,
+      "icon": "10d"
+    },
+    {
+      "title": "Tue",
+      "temp": 17.67,
+      "icon": "02d"
+    }
+  ],
+  "hourly": [
+    {
+      "title": "07 PM",
+      "temp": 18.04,
+      "icon": "03n"
+    },
+    {
+      "title": "08 PM",
+      "temp": 18.08,
+      "icon": "03n"
+    },
+    {
+      "title": "09 PM",
+      "temp": 18.05,
+      "icon": "03n"
+    },
+    {
+      "title": "10 PM",
+      "temp": 17.9,
+      "icon": "04n"
+    },
+    {
+      "title": "11 PM",
+      "temp": 17.65,
+      "icon": "04n"
+    }
+  ]
+}

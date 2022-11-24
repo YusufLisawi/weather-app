@@ -1,14 +1,22 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
-export default function SearchBar({onSearch, onFocuss, onBlurr}) {
-  const inputDiv = useRef();
+export default function SearchBar({ onSearch, onFocuss, onBlurr }) {
+  const inputDiv = useRef()
+  const [search, setSearch] = useState("");
+
+  const handleOnChange = (value) => {
+    setSearch(value);
+  };
   return (
-    <form className="relative z-50" onSubmit={(e) => {
-      e.preventDefault()
-      if (inputDiv.current.value.trim() !== "")
-        onSearch(inputDiv.current.value.trim())
-        inputDiv.current.value = ""
-    }}>
+    <form
+      className="relative z-50"
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (search.trim() !== "")
+          onSearch(search.trim());
+          setSearch("")
+      }}
+    >
       <div
         className="flex items-center gap-2 p-2 rounded-lg input-control"
         onClick={() => {
@@ -20,9 +28,11 @@ export default function SearchBar({onSearch, onFocuss, onBlurr}) {
         <input
           type="text"
           placeholder="Search for a city"
+          value={search}
           className="bg-transparent opacity-100 w-full"
-          ref={inputDiv}
+          onChange={(e) => handleOnChange(e.target.value)}
           onBlur={() => onBlurr()}
+          ref={inputDiv}
         />
       </div>
     </form>

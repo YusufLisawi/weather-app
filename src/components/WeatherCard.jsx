@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Tilty from "react-tilty";
-export default function WeatherCard() {
+import { formatToLocalTime } from "../api/weatherApi";
+import {AiTwotonePushpin} from "react-icons/ai"
+
+export default function WeatherCard({
+  weather: { dt, timezone, name, description, temp, humidity },
+}) {
   const [shadow, setShadow] = useState(false);
 
   function showShadow() {
@@ -8,6 +13,10 @@ export default function WeatherCard() {
   }
   function hideShadow() {
     setShadow(false);
+  }
+
+  function toCapitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
   return (
     <Tilty max={10}>
@@ -30,22 +39,21 @@ export default function WeatherCard() {
         <div className="relative">
           <div className="flex justify-between mb-5">
             <div>
-              <h1 className="text-3xl font-semibold text-shadow">Tetouan</h1>
+              <h1 className="text-3xl font-semibold text-shadow">{name}</h1>
               <p className="font-bold opacity-60">
-                {new Date().getHours()}:
-                {new Date().getMinutes() <= 9
-                  ? `0${new Date().getMinutes()}`
-                  : new Date().getMinutes()}
+                {formatToLocalTime(dt, timezone, "hh:mm a")}
               </p>
             </div>
-            <h1 className="text-5xl font-medium">20˚</h1>
+            <div>
+              {/* <p className="ml-1 opacity-80 font-medium text-shadow">H:{parseInt(humidity)} <span style={{fontSize: '10px'}}>%</span></p> */}
+              <h1 className="text-5xl font-medium">{parseInt(temp)}˚</h1>
+            </div>
           </div>
 
           <div className="font-medium flex justify-between items-center">
-            <p className="opacity-60">Partly cloudy</p>
-            <div className="flex gap-2 opacity-80 font-medium text-shadow">
-              <p>H:21˚</p>
-              <p>L:16˚</p>
+            <p className="opacity-70">{toCapitalize(description)}</p>
+            <div>
+              <p className="duration-300 hover:scale-150 active:scale-50"><AiTwotonePushpin size={22}/></p>
             </div>
           </div>
         </div>

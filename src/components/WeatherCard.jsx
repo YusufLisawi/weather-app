@@ -7,12 +7,11 @@ import { setPinnedCords } from "../redux/weatherSlice";
 
 export default function WeatherCard({
   weather: { lat, lon, dt, timezone, name, description, temp, details },
-  nopin,
+  nopin, weather
 }) {
-  const [inPinned, setInPinned] = useState(false);
   const [shadow, setShadow] = useState(false);
-  const pinnedCords = useSelector((state) => state.weather.pinnedCords);
-  const dispatch = useDispatch();
+  const [expand, setExpand] = useState(false);
+  console.log(weather)
 
   function showShadow() {
     setShadow(true);
@@ -25,16 +24,9 @@ export default function WeatherCard({
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  useEffect(() => {
-    pinnedCords.forEach((cords) => {
-      if (cords.name === name) {
-        setInPinned(true);
-      }
-    });
-  }, [pinnedCords]);
-
   return (
-    <Tilty max={10}>
+    // <Tilty max={10}>
+    <div className="relative z-50">
       <div
         className={`duration-300 absolute bg-gray-200 -z-10 inset-8 filter blur-3xl ${
           !shadow ? "opacity-0" : "opacity-60"
@@ -64,8 +56,8 @@ export default function WeatherCard({
 
           <div className="font-medium flex justify-between items-center">
             <p className="opacity-70">{toCapitalize(description)}</p>
-            <div>
-              {!nopin && !inPinned && (
+            {/* <div>
+              {!nopin  && (
                 <p
                   className="duration-300 hover:scale-150 active:scale-50"
                   onClick={() => {
@@ -75,11 +67,12 @@ export default function WeatherCard({
                   <AiTwotonePushpin size={22} />
                 </p>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
-    </Tilty>
+    </div>
+    // </Tilty>
   );
   return;
 }

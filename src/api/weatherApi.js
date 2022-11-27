@@ -15,8 +15,10 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5/";
 const getData = (infoType, searchParams) => {
   const url = new URL(BASE_URL + infoType);
   url.search = new URLSearchParams({ ...searchParams, appid: API_KEY });
-  console.log("url => ", url);
-  return axios.get(url).then((res) => res.data);
+  console.log(url)
+  const data = axios.get(url).then((res) => res.data)
+  console.log(data)
+  return data;
 };
 
 // Cleanup fetched data from api (only what we need)

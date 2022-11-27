@@ -1,8 +1,16 @@
 import React, { useRef, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
-export default function SearchBar({ onSearch, onFocuss, onBlurr }) {
+export default function SearchBar({ onSearch }) {
+  const [focused, setFocused] = useState(false);
   const inputDiv = useRef()
   const [search, setSearch] = useState("");
+
+  const onFocuss = () => {
+    setFocused(true);
+  };
+  const onBlurr = () => {
+    setFocused(false);
+  };
 
   const handleOnChange = (value) => {
     setSearch(value);
@@ -34,6 +42,11 @@ export default function SearchBar({ onSearch, onFocuss, onBlurr }) {
           onBlur={() => onBlurr()}
           ref={inputDiv}
         />
+        <div className={!focused ? "animate-pulseslow" : ""}>
+          <div className="absolute -bottom-4 left-20 w-60 h-60 bg-teal-400 rounded-full mix-blend-screen filter blur-3xl opacity-20 -z-10 animate-blob"></div>
+          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-600 rounded-full mix-blend-screen filter blur-3xl opacity-20 -z-10 animate-blob "></div>
+          <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-400 rounded-full mix-blend-screen filter blur-3xl opacity-20 -z-10 animate-blob"></div>
+        </div>
       </div>
     </form>
   );

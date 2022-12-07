@@ -7,11 +7,12 @@ import { setPinnedCords } from "../redux/weatherSlice";
 
 export default function WeatherCard({
   weather: { lat, lon, dt, timezone, name, description, temp, details },
-  nopin, weather
+  nopin,
+  weather,
 }) {
   const [shadow, setShadow] = useState(false);
   const [expand, setExpand] = useState(false);
-  console.log(weather)
+  console.log(weather);
 
   function showShadow() {
     setShadow(true);
@@ -25,8 +26,8 @@ export default function WeatherCard({
   }
 
   return (
-    // <Tilty max={10}>
     <div className="relative z-50">
+      {/* <Tilty max={10}> */}
       <div
         className={`duration-300 absolute bg-gray-200 -z-10 inset-8 filter blur-3xl ${
           !shadow ? "opacity-0" : "opacity-60"
@@ -44,35 +45,45 @@ export default function WeatherCard({
           alt={details}
         />
         <div className="relative">
-          <div className="flex justify-between mb-5">
+          <div
+            className={`flex justify-between mb-5 ${
+              expand && "mt-3 flex-col text-center"
+            } duration-100`}
+          >
             <div>
-              <h1 className="text-3xl font-semibold text-shadow">{name}</h1>
-              <p className="font-bold opacity-60">
+              <h1 className={`text-4xl font-semibold text-shadow duration-100`}>
+                {name}
+              </h1>
+              <p
+                className={`font-bold text-shadow ${
+                  expand ? "opacity-100 text-lg" : "opacity-60"
+                } duration-100`}
+              >
                 {formatToLocalTime(dt, timezone, "hh:mm a")}
               </p>
             </div>
-            <h1 className="text-5xl font-medium">{Math.ceil(temp)}˚</h1>
+            <h1 className="text-6xl font-medium relative text-shadow">
+              <span className="absolute inset-0 left-20">˚</span>
+              {Math.ceil(temp)}
+            </h1>
           </div>
 
-          <div className="font-medium flex justify-between items-center">
+          {/* <div className="font-medium flex justify-between items-center">
             <p className="opacity-70">{toCapitalize(description)}</p>
-            {/* <div>
+            <div>
               {!nopin  && (
                 <p
                   className="duration-300 hover:scale-150 active:scale-50"
-                  onClick={() => {
-                    dispatch(setPinnedCords({ name, lat, lon }));
-                  }}
                 >
                   <AiTwotonePushpin size={22} />
                 </p>
               )}
-            </div> */}
-          </div>
+            </div>
+          </div> */}
         </div>
       </div>
+      {/* </Tilty> */}
     </div>
-    // </Tilty>
   );
   return;
 }

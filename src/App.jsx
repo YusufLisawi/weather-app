@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar";
-import WeatherCard from "./components/WeatherCard";
 import getWeatherData from "./api/weatherApi";
-import Loader from "./components/Loader";
+import SearchResult from "./components/SearchResult";
+import { BsFillPinFill } from "react-icons/bs";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Pinned from "./components/Pinned";
 
 export default function App() {
   const [loading, setLoading] = useState({
     myLocation: false,
     weatherSearched: false,
   });
-  const [weatherSearched, setWeatherSearched] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
-
-  const fetchMyLocation = async (lat, lon) => {
-    setLoading({ ...loading, myLocation: true });
-    await getWeatherData({ lat: lat, lon: lon, units: "metric" }).then(
-      (data) => {
-        setCurrentLocation(data);
-        setLoading({ ...loading, myLocation: false });
-      }
-    );
-  };
+  const [weatherSearched, setWeatherSearched] = useState(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -32,6 +24,16 @@ export default function App() {
     }
   }, []);
 
+  const fetchMyLocation = async (lat, lon) => {
+    setLoading({ ...loading, myLocation: true });
+    await getWeatherData({ lat: lat, lon: lon, units: "metric" }).then(
+      (data) => {
+        setCurrentLocation(data);
+        setLoading({ ...loading, myLocation: false });
+      }
+    );
+  };
+
   const fetchWeather = async (city) => {
     setLoading({ ...loading, weatherSearched: true });
     await getWeatherData({ q: city, units: "metric" }).then((data) => {
@@ -41,38 +43,36 @@ export default function App() {
   };
 
   return (
-    <div className="container">
-      <div className="relative">
-        <h1 className="relative z-50 font-bold text-4xl py-4">Weather</h1>
-        <SearchBar onSearch={fetchWeather} />
-      </div>
-      <div className="weathers my-8 relative">
-        <p className="font-medium my-4 mx-2 text-gray-200 opacity-50">
-          Your current location
-        </p>
-        {loading.myLocation ? (
-          <div className="flex justify-center scale-75">
-            <Loader />
+    <Router>
+      <div className="container">
+        <div className="relative">
+          <div className="flex justify-between items-center py-4">
+            <Link to="/">
+              <h1 className="relative z-50 font-bold text-4xl">Weather</h1>
+            </Link>
+            <Link className="relative cursor-pointer p-2" to="pinned">
+              <BsFillPinFill size={25}/>
+              <div class="inline-flex absolute -top-2 -right-0 justify-center items-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white dark:border-gray-900 text-xs">
+                2
+              </div>
+            </Link>
           </div>
-        ) : (
-          currentLocation && (
-            <WeatherCard weather={currentLocation} nopin={true} />
-          )
-        )}
-        <hr className="w-80 mx-auto opacity-10" />
-        <br />
-        {loading.weatherSearched ? (
-          <div className="flex justify-center scale-75">
-            <Loader />
-          </div>
-        ) : (
-          weatherSearched && (
-            <div>
-              <WeatherCard weather={weatherSearched} />
-            </div>
-          )
-        )}
+          <SearchBar onSearch={fetchWeather} />
+        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <SearchResult
+                loading={loading}
+                currentLocation={currentLocation}
+                weatherSearched={weatherSearched}
+              />
+            }
+          />
+          <Route path="pinned" element={<Pinned />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }

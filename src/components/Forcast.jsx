@@ -5,7 +5,7 @@ export default function Forcast({ weather }) {
 		<div className="forecast grid place-content-center mb-4">
 			<div className="flex gap-8 text-center font-bold text-xl bg-gray-800/10 backdrop-blur-sm py-3 px-4 rounded-3xl">
 				{weather.map((d) => (
-					<div>
+					<div key={weather.lat}>
 						<h2 className="font-semibold text-lg">{d.title}</h2>
 						<img
 							src={d.icon}

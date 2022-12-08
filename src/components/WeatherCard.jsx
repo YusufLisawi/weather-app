@@ -5,7 +5,10 @@ import Forcast from "./Forcast";
 import "./styles/weather.css";
 import { motion, AnimatePresence } from "framer-motion";
 import SunTime from "./SunTime";
-import { AiFillPushpin } from "react-icons/ai";
+import { AiFillDelete, AiFillPushpin } from "react-icons/ai";
+import { deletePinnedCords, setPinnedCords } from "../redux/weatherSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function WeatherCard({
 	weather: {
@@ -21,37 +24,33 @@ export default function WeatherCard({
 		details,
 	},
 	nopin,
+	remove,
 	weather,
 }) {
-	const [shadow, setShadow] = useState(false);
 	const [expand, setExpand] = useState(false);
-	console.log(weather);
-
-	function showShadow() {
-		setShadow(true);
-	}
-	function hideShadow() {
-		setShadow(false);
-	}
+	const pinnedCords = useSelector((state) => state.weather.pinnedCords);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	function toCapitalize(str) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
 
+	function cordsSaved(lat, lon) {
+		return (
+			pinnedCords.filter((c) => c.lat === lat && c.lon === lon).length >
+				0 || nopin
+		);
+	}
+	// console.log("pinnedCords: ", pinnedCords);
+
 	return (
 		<>
 			<Tilty max={6}>
-				<div
-					className={`duration-300 bg-gray-200 -z-10 inset-8 filter blur-3xl ${
-						!shadow ? "opacity-0" : "opacity-60"
-					}`}
-				></div>
 				<motion.div
 					layout
 					transition={{ layout: { duration: 0.5, type: "spring" } }}
 					className="mb-5 cursor-pointer weather-card py-3 px-5 w-full rounded-3xl relative select-none overflow-hidden"
-					onMouseOver={() => showShadow()}
-					onMouseLeave={() => hideShadow()}
 					onClick={() => setExpand(!expand)}
 					style={{
 						backgroundImage: `url("${
@@ -113,9 +112,25 @@ export default function WeatherCard({
 				</motion.div>
 			</Tilty>
 			<div className="relative">
-				{!nopin && (
-					<p className="absolute -top-9 -right-3 p-2 rounded-full bg-black hover:text-red-400 duration-300 cursor-pointer">
+				{!cordsSaved(lat, lon) && (
+					<p
+						className="absolute -top-9 -right-3 p-2 rounded-full bg-black hover:text-red-400 duration-300 cursor-pointer"
+						onClick={() => {
+							dispatch(setPinnedCords({ lat: lat, lon: lon }));
+						}}
+					>
 						<AiFillPushpin size={20} />
+					</p>
+				)}
+				{remove && (
+					<p
+						className="absolute -top-9 -right-3 p-2 rounded-full bg-black hover:text-red-400 duration-300 cursor-pointer"
+						onClick={() => {
+							dispatch(deletePinnedCords({ lat: lat, lon: lon }));
+							navigate("/");
+						}}
+					>
+						<AiFillDelete size={20} />
 					</p>
 				)}
 			</div>

@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+
 export default function SearchBar({ onSearch }) {
 	const [focused, setFocused] = useState(false);
 	const inputDiv = useRef();
 	const [search, setSearch] = useState("");
-
+	const navigate = useNavigate();
 	const onFocuss = () => {
 		setFocused(true);
 	};
@@ -22,6 +24,7 @@ export default function SearchBar({ onSearch }) {
 				e.preventDefault();
 				if (search.trim() !== "") onSearch(search.trim());
 				setSearch("");
+				navigate("/");
 			}}
 		>
 			<div

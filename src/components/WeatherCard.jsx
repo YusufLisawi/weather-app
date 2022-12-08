@@ -5,7 +5,7 @@ import Forcast from "./Forcast";
 import "./styles/weather.css";
 import { motion, AnimatePresence } from "framer-motion";
 import SunTime from "./SunTime";
-import { AiFillDelete, AiFillPushpin } from "react-icons/ai";
+import { TbPinnedOff, TbPin } from "react-icons/tb";
 import { deletePinnedCords, setPinnedCords } from "../redux/weatherSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -117,9 +117,10 @@ export default function WeatherCard({
 						className="absolute -top-9 -right-3 p-2 rounded-full bg-black hover:text-red-400 duration-300 cursor-pointer"
 						onClick={() => {
 							dispatch(setPinnedCords({ lat: lat, lon: lon }));
+							navigate("pinned");
 						}}
 					>
-						<AiFillPushpin size={20} />
+						<TbPin size={20} />
 					</p>
 				)}
 				{remove && (
@@ -130,7 +131,7 @@ export default function WeatherCard({
 							navigate("/");
 						}}
 					>
-						<AiFillDelete size={20} />
+						<TbPinnedOff size={20} />
 					</p>
 				)}
 			</div>

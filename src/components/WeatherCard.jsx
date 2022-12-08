@@ -111,7 +111,7 @@ export default function WeatherCard({
 					</div>
 				</motion.div>
 			</Tilty>
-			<div className="relative">
+			<motion.div layout className="relative">
 				{!cordsSaved(lat, lon) && (
 					<p
 						className="absolute -top-9 -right-3 p-2 rounded-full bg-black hover:text-red-400 duration-300 cursor-pointer"
@@ -134,7 +134,7 @@ export default function WeatherCard({
 						<TbPinnedOff size={20} />
 					</p>
 				)}
-			</div>
+			</motion.div>
 		</>
 	);
 }

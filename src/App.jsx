@@ -6,6 +6,7 @@ import { BsFillPinFill } from "react-icons/bs";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Pinned from "./components/Pinned";
 import { useSelector } from "react-redux";
+import { AnimatePresence } from "framer-motion";
 
 export default function App() {
 	const [loading, setLoading] = useState({
@@ -66,21 +67,23 @@ export default function App() {
 					</div>
 					<SearchBar onSearch={fetchWeather} />
 				</div>
-				<div className="relative z-50">
-					<Routes>
-						<Route
-							path="/"
-							element={
-								<SearchResult
-									loading={loading}
-									currentLocation={currentLocation}
-									weatherSearched={weatherSearched}
-								/>
-							}
-						/>
-						<Route path="pinned" element={<Pinned />} />
-					</Routes>
-				</div>
+				<AnimatePresence initial={false}>
+					<div className="relative z-50">
+						<Routes>
+							<Route
+								path="/"
+								element={
+									<SearchResult
+										loading={loading}
+										currentLocation={currentLocation}
+										weatherSearched={weatherSearched}
+									/>
+								}
+							/>
+							<Route path="pinned" element={<Pinned />} />
+						</Routes>
+					</div>
+				</AnimatePresence>
 			</div>
 		</Router>
 	);

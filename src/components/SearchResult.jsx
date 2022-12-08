@@ -8,7 +8,13 @@ export default function SearchResult({
 	weatherSearched,
 }) {
 	return (
-		<motion.div className="weathers my-8 relative">
+		<motion.div
+			className="weathers my-8 relative"
+			initial={{ y: "100%", opacity: 0 }}
+			animate={{ y: "0%", opacity: 1 }}
+			transition={{ duration: 0.5 }}
+			exit={{ y: "-100%", opacity: 0 }}
+		>
 			<p className="font-medium my-4 mx-2 text-gray-200 opacity-50">
 				Your current location
 			</p>

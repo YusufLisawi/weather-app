@@ -12,7 +12,7 @@ export default function Loader() {
 			>
 				<defs>
 					<linearGradient id="pl-grad" x1="0" y1="0" x2="0" y2="1">
-						<stop offset="0%" stopColor="hsl(274,80%,35%)" />
+						<stop offset="0%" stopColor="hsl(74,80%,35%)" />
 						<stop offset="50%" stopColor="hsl(50,80%,55%)" />
 						<stop offset="100%" stopColor="hsl(174,80%,35%)" />
 					</linearGradient>

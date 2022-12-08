@@ -60,7 +60,7 @@ export default function App() {
 							to="pinned"
 						>
 							<BsFillPinFill size={25} />
-							<div class="inline-flex absolute -top-2 -right-0 justify-center items-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white dark:border-gray-900 text-xs">
+							<div class="inline-flex absolute -top-2 -right-0 justify-center items-center w-6 h-6 font-bold text-white bg-red-500 rounded-full border-2 border-white dark:border-gray-900 text-xs">
 								{pinnedCords.length}
 							</div>
 						</Link>

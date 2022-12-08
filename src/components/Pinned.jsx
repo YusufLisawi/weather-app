@@ -38,6 +38,13 @@ export default function Pinned() {
 			<button className="my-4 mb-6" onClick={() => navigate(-1)}>
 				<ImArrowLeft2 size={22} />
 			</button>
+			{!loading && locations.length === 0 && (
+				<div className="grid place-content-center">
+					<p className="font-medium my-4 mx-2 text-gray-200 opacity-50">
+						No pinned locations
+					</p>
+				</div>
+			)}
 			{loading ? (
 				<div className="flex justify-center scale-75">
 					<Loader />

@@ -1,6 +1,4 @@
-.weather-card{
-	object-fit: cover;
-	object-position: center;
+.weather-card {
 	background-position: center;
 	background-size: cover;
 }

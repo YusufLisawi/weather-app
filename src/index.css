@@ -3,50 +3,51 @@
 @tailwind utilities;
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: black;
-  color: white;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: black;
+	color: white;
+	height: 100.01vh;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 }
 input {
-  outline: none !important;
-  color: white;
+	outline: none !important;
+	color: white;
 }
 input::placeholder {
-  color: gray;
+	color: gray;
 }
 .input-control {
-  background-color: #6363633e;
-  backdrop-filter: blur(10px);
+	background-color: #6363633e;
+	backdrop-filter: blur(10px);
 }
 .search-icon {
-  color: gray;
+	color: gray;
 }
 .container {
-  max-width: 580px !important;
-  margin-top: 6em !important;
-  padding: 1.5em !important;
-  margin: 0 auto;
+	max-width: 580px !important;
+	margin-top: 6em !important;
+	padding: 1.5em !important;
+	margin: 0 auto;
 }
 
 .text-shadow {
-  text-shadow: 0px 4px 8px rgba(34, 34, 34, 0.5);
+	text-shadow: 0px 4px 8px rgba(34, 34, 34, 0.5);
 }
 
 .layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.25;
-  background: #000;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.25;
+	background: #000;
 }

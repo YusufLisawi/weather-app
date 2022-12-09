@@ -51,3 +51,8 @@ input::placeholder {
 	opacity: 0.25;
 	background: #000;
 }
+
+.pin-icon {
+	position: relative;
+	z-index: 1000 !important;
+}

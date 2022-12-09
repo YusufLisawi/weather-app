@@ -49,7 +49,7 @@ export default function App() {
 		<Router>
 			<div className="container">
 				<div className="relative">
-					<div className="flex justify-between items-center py-4">
+					<div className="flex justify-between items-center py-4 pin-icon">
 						<Link to="/">
 							<h1 className="relative z-50 font-bold text-4xl">
 								Weather
